@@ -1,0 +1,13 @@
+{
+  "name": "9kink",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gentypes": "supabase gen types typescript --linked | sed -E 's/(username.?:) unknown/\\1 string/g' > web/src/database.generated.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
