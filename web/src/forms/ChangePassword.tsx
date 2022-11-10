@@ -67,7 +67,7 @@ export default function ChangePasswordForm() {
             input={{ type: "password" }}
           />
 
-          <Button isLoading={form.formState.isSubmitting} type="submit">
+          <Button variant="solid" isLoading={form.formState.isSubmitting} type="submit">
             Update Password
           </Button>
         </Flex>

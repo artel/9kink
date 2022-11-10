@@ -11,7 +11,7 @@ import {
 import { useAppDispatch } from "../hooks";
 import { signIn } from "../features/auth/authSlice";
 import { CustomFormControl } from "../common/forms";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -62,7 +62,7 @@ export default function SignInForm() {
             input={{ type: "password" }}
           />
 
-          <Button isLoading={form.formState.isSubmitting} type="submit">
+          <Button variant="solid" isLoading={form.formState.isSubmitting} type="submit">
             Sign In
           </Button>
         </Flex>

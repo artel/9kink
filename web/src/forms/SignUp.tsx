@@ -34,7 +34,7 @@ export default function SignUpForm() {
           input={{ type: "password" }}
         />
 
-        <Button isLoading={form.formState.isSubmitting} type="submit">
+        <Button variant="solid" isLoading={form.formState.isSubmitting} type="submit">
           Sign Up
         </Button>
       </Flex>

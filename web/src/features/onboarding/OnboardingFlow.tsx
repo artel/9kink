@@ -9,6 +9,7 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { skipToken } from "@reduxjs/toolkit/dist/query";
 import { useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -16,6 +17,7 @@ import { CustomFormControl } from "../../common/forms";
 import { useAppSelector, useMe } from "../../hooks";
 import supabase from "../../supabase";
 import { isUniqueConstraintError } from "../../utils";
+import { useProfileQuery } from "../databaseApi";
 
 const formSchema = z.object({
   username: z.string().min(3),
@@ -27,8 +29,11 @@ export default function OnboardingFlow() {
     resolver: zodResolver(formSchema),
   });
 
+  const initialized = useAppSelector((state) => state.app.initialized);
   const user = useAppSelector((state) => state.auth.user);
-  const [profile, refetch] = useMe();
+  const { data: profile, refetch, isSuccess } = useProfileQuery(
+    initialized && user ? { userId: user.userId } : skipToken
+  );
 
   const onSubmit = useCallback<SubmitHandler<FieldValues>>(
     async (data) => {
@@ -54,7 +59,7 @@ export default function OnboardingFlow() {
     [form, refetch, user]
   );
 
-  if (user && !profile) {
+  if (initialized && user && isSuccess && !profile) {
     return (
       <>
         <Modal

@@ -1,11 +1,10 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { Alert, AlertDescription, Button, Flex } from "@chakra-ui/react";
 import { CustomFormControl } from "../common/forms";
 import supabase from "../supabase";
-import { useProfileQuery } from "../features/databaseApi";
 import { useMe } from "../hooks";
 import { useNavigate } from "react-router-dom";
 
@@ -87,7 +86,7 @@ export default function ResetPasswordForm() {
             <Alert status="success">
               <AlertDescription>
                 Check your email for a link to reset your password. If it
-                doesn’t appear within a few minutes, check your spam folder.
+                doesn&apost;t appear within a few minutes, check your spam folder.
               </AlertDescription>
             </Alert>
           )}
@@ -100,6 +99,7 @@ export default function ResetPasswordForm() {
               <CustomFormControl form={resetPasswordEmailForm} field="email" />
 
               <Button
+                variant="solid"
                 isLoading={resetPasswordEmailForm.formState.isSubmitting}
                 type="submit"
               >

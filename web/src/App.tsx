@@ -2,18 +2,16 @@ import {
   Box,
   Button,
   Flex,
-  HStack,
-  Image,
   Spacer,
   Text,
   useColorMode,
 } from "@chakra-ui/react";
+import { SkipNavLink, SkipNavContent } from '@chakra-ui/skip-nav'
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { useProfileQuery } from "./features/databaseApi";
 import OnboardingFlow from "./features/onboarding/OnboardingFlow";
 import { useAppSelector } from "./hooks";
-import supabase from "./supabase";
 
 function App() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -29,21 +27,8 @@ function App() {
 
   return (
     <>
+      <SkipNavLink>Skip to content</SkipNavLink>
       <OnboardingFlow />
-      {profile?.avatarFile && (
-        <>
-          <Image
-            boxSize="100px"
-            objectFit="cover"
-            src={
-              supabase.storage
-                .from("userdata")
-                .getPublicUrl(`${profile.user_id}/avatar/${profile.avatarFile}`)
-                .data.publicUrl
-            }
-          />
-        </>
-      )}
       <Box m={2}>
         {profile && (
           <Text>
@@ -67,6 +52,7 @@ function App() {
         <Button onClick={toggleColorMode}>{colorMode}</Button>
       </Box>
       <Box m={4}>
+        <SkipNavContent />
         <Outlet />
       </Box>
     </>

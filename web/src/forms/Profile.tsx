@@ -100,7 +100,7 @@ export default function ProfileForm() {
             input={{ type: "file", padding: 0, border: "none" }}
           />
 
-          <Button isLoading={form.formState.isSubmitting} type="submit">
+          <Button variant="solid" isLoading={form.formState.isSubmitting} type="submit">
             Save Profile
           </Button>
         </Flex>
